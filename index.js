@@ -141,8 +141,4 @@ class Game{
   }
 }
 
-function startGame(){
-  Game.start();
-}
-
-startGame();
+Game.start();

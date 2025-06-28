@@ -1,6 +1,17 @@
 class PillarLogic{
   constructor(){}
 
+  pillarDeletionTimeouts = [];
+
+  freezePillars(){
+    this.pillarDeletionTimeouts.forEach(timeOut => clearTimeout(timeOut));
+    document.querySelectorAll(`.pillar`).forEach(pillar => {
+      const rightOffset = getComputedStyle(pillar).right;
+      pillar.style.removeProperty(`animation`);
+      pillar.style.right = rightOffset;
+    })
+  }
+
   newPillar(){
     return {
       height: Math.floor(Math.random() * 21) + 25, //height clamped to being between 20 and 45 units (which will represent the percentage css height of the pillar element)
@@ -25,9 +36,17 @@ class PillarLogic{
     document.querySelector(`#game`).appendChild(pillarElement);
 
     pillarElement.style.animation = `moveLeft ${finishJourneyInMilliseconds/1000}s linear`;
-    setTimeout(()=>{
-      pillarElement.remove();
-    }, finishJourneyInMilliseconds)
+
+
+    const timeOutId = setTimeout(
+      ()=>{
+        pillarElement.remove();
+        const index = this.pillarDeletionTimeouts.indexOf(timeOutId);
+        if (index > -1) 
+          this.pillarDeletionTimeouts.splice(index, 1);
+      }, finishJourneyInMilliseconds);
+
+    this.pillarDeletionTimeouts.push(timeOutId);
 
     return bottomOrTop;
   }
@@ -54,15 +73,14 @@ class PillarLogic{
       this.renderPillar() === `top` ? topInARow++ : bottomInARow++
     }, everyWhatMilliseconds);
   }
-  stopPillars(){
+  stopStream(){
     clearInterval(this.interval)
     this.interval = null;
   }
-}
 
-class Game{
-  constructor(){}
-  
+  clearPillars(){
+    document.querySelectorAll(`.pillar`).forEach(pillar => pillar.remove());
+  }
 }
 
 class Bird{
@@ -76,35 +94,55 @@ class Bird{
   }
 }
 
-const pillarLogic = new PillarLogic();
-const bird = new Bird();
-bird.renderBird();
+class Game{
+
+  static refreshInterval;
+  static pillarLogic = new PillarLogic();
+
+  static start(fps=60){
+                const bird = new Bird();
+                bird.renderBird();
 
 
-const birdy = document.querySelector(`#bird`)
-const game = document.querySelector(`#game`)
-
-function test(fps=30){
-  let position = 0/fps;
-  let velocity = 100/fps;
-  let acceleration = 9/fps;
-
-  game.addEventListener(`mousedown`, () => {
-    velocity = 100/fps;
-  })
+                const birdy = document.querySelector(`#bird`)
+                const game = document.querySelector(`#game`)
 
 
+                let position = 45;
+                let velocity = 0;
+                let acceleration = 6/fps;
 
-  setInterval(()=>{
-    position += velocity;
-    velocity -= acceleration;
-    if (position < 0) position = 0;
-    if (position > 90){
-      position = 90;
-      velocity = 0;
-    }
-    birdy.style.bottom = position + '%';
-  }, 1000/fps)
+                game.addEventListener(`mousedown`, () => {
+                  if (!Game.refreshInterval){
+                    this.pillarLogic.clearPillars();
+                    position = 45;
+                    Game.pillarLogic.streamPillars();
+                    Game.refreshInterval = setInterval(()=>{
+                          position += velocity;
+                          velocity -= acceleration;
+                          if (position < 0) position = 0;
+                          if (position > 90){
+                            position = 90;
+                            velocity = 0;
+                          }
+                          birdy.style.bottom = position + '%';
+                    }, 1000/fps);
+                  }
+                  velocity = 100/fps;
+                })
+  }
+
+  static lose(){
+    clearInterval(Game.refreshInterval);
+    Game.refreshInterval = null;
+
+    Game.pillarLogic.stopStream();
+    Game.pillarLogic.freezePillars();
+  }
 }
 
-test();
+function startGame(){
+  Game.start();
+}
+
+startGame();

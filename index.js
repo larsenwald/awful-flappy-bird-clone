@@ -165,15 +165,3 @@ class Game{
 }
 
 Game.start();
-
-
-//debugging
-/*
-const bird = document.querySelector(`#bird`)
-document.addEventListener('mousemove', function(event) {
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-            document.querySelector(`#mouse-position`).innerText = `Viewport X: ${mouseX}, Viewport Y: ${mouseY}`;
-        });
-
-*/

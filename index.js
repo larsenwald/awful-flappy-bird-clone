@@ -153,13 +153,6 @@ class Game{
                   }
                   velocity = 100/fps;
                 })
-
-                //variable jump
-                let jumpCap = 25/fps;
-                game.addEventListener(`mouseup`, ()=>{
-                  if (velocity > jumpCap)
-                    velocity = jumpCap;
-                })
   }
 
   static lose(){

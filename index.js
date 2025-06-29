@@ -125,14 +125,12 @@ class Game{
 
   static refreshInterval;
   static pillarLogic = new PillarLogic();
+  static gameElement = document.querySelector(`#game`);
 
   static start(fps=60){
                 const bird = new Bird();
                 bird.renderBird();
 
-
-                
-                const game = document.querySelector(`#game`)
                 const birdy = document.querySelector(`#bird`)
                 const score = document.querySelector(`#score`);
                 let currentScore = 0;
@@ -142,9 +140,10 @@ class Game{
                 let velocity = 0;
                 let acceleration = 6/fps;
 
-                game.addEventListener(`mousedown`, () => {
+                Game.gameElement.addEventListener(`mousedown`, () => {
                   if (!Game.refreshInterval){
                     document.querySelector(`#you-lost`).classList.add(`hidden`);
+                    document.querySelector(`#restart-prompt`).classList.add(`hidden`);
                     currentScore = 0;
                     position = 45;
                     Game.pillarLogic.resetDeletedCounter();
@@ -174,6 +173,12 @@ class Game{
     clearInterval(Game.refreshInterval);
     Game.refreshInterval = null;
     document.querySelector(`#you-lost`).classList.remove(`hidden`);
+    
+    Game.gameElement.style.pointerEvents = 'none';
+    setTimeout(()=>{
+      document.querySelector(`#restart-prompt`).classList.remove(`hidden`);
+      Game.gameElement.style.pointerEvents = 'auto';
+    }, 2000)
 
     Game.pillarLogic.stopStream();
     Game.pillarLogic.freezePillars();

@@ -42,19 +42,13 @@ body {
   z-index: 1;
 }
 
-@keyframes moveLeft {
-  to {
-    right: 100%;
-  }
-}
-
 h1 {
   position: fixed;
   top: 0;
   user-select: none;
 }
 
-#you-lost {
+#text-block {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -63,6 +57,30 @@ h1 {
   user-select: none;
 }
 
+#restart-prompt{
+  animation: pulse 1.5s linear infinite;
+  font-style: italic;
+}
+
 .hidden{
-  display: none !important;
+  visibility: hidden;
+}
+
+
+@keyframes moveLeft {
+  to {
+    right: 100%;
+  }
+}
+
+@keyframes pulse {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
 }

@@ -155,9 +155,10 @@ class Game{
                 })
 
                 //variable jump
+                let jumpCap = 25/fps;
                 game.addEventListener(`mouseup`, ()=>{
-                  if (velocity > 0)
-                    velocity = velocity/4;
+                  if (velocity > jumpCap)
+                    velocity = jumpCap;
                 })
   }
 

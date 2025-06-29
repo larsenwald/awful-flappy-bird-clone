@@ -96,23 +96,21 @@ class Bird{
 
 class Collision{
 
-  static check(subject, objects = []){//both the subject and objects are parameters take DOM elements
-    let collision;
-
+  static check(subject, objects = []){//both the subject and objects parameters take DOM elements
     const sbj = subject.getBoundingClientRect();
-    
-    objects.forEach(object => {
-      const obj = object.getBoundingClientRect();
-      
+  
+    for (let i = 0; i < objects.length; i++){
+      const obj = objects[i].getBoundingClientRect();
+
       if (
         sbj.right > obj.left && 
         sbj.left < obj.right &&
         sbj.bottom > obj.top &&
         sbj.top < obj.bottom
-      ) collision = true;
-    });
+      ) return true;
+    }
 
-    return collision;
+    return false;
   }
 
 }
@@ -153,7 +151,13 @@ class Game{
                           birdy.style.bottom = position + '%';
                     }, 1000/fps);
                   }
-                  velocity = 100/fps;
+                  velocity = 150/fps;
+                })
+
+                //variable jump
+                game.addEventListener(`mouseup`, ()=>{
+                  if (velocity > 0)
+                    velocity = velocity/4;
                 })
   }
 

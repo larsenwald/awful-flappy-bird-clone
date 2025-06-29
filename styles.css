@@ -66,6 +66,10 @@ h1 {
   visibility: hidden;
 }
 
+.loss-animation{
+  animation: wiggle-and-turn-red 0.5s linear;
+}
+
 
 @keyframes moveLeft {
   to {
@@ -82,5 +86,26 @@ h1 {
   }
   100%{
     opacity: 0;
+  }
+}
+
+@keyframes wiggle-and-turn-red {
+  0%{
+    transform: translateX(-10%);
+  }
+  25%{
+    transform: translateX(10%);
+    background: red;
+  }
+  50%{
+    transform: translateX(-10%);
+    background: red;
+  }
+  75%{
+    transform: translateX(10%);
+    background: red;
+  }
+  100%{
+    transform: translateX(0);
   }
 }

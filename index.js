@@ -173,6 +173,12 @@ class Game{
     clearInterval(Game.refreshInterval);
     Game.refreshInterval = null;
     document.querySelector(`#you-lost`).classList.remove(`hidden`);
+
+    const birdElement = document.querySelector(`#bird`);
+    birdElement.classList.remove(`loss-animation`);
+    birdElement.getBoundingClientRect(); //force browser reflow
+    birdElement.classList.add(`loss-animation`);
+
     
     Game.gameElement.style.pointerEvents = 'none';
     setTimeout(()=>{

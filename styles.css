@@ -45,3 +45,8 @@ body {
     right: 100%;
   }
 }
+
+#mouse-position {
+  position: fixed;
+  top: 0;
+}

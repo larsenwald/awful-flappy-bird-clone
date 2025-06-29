@@ -94,6 +94,29 @@ class Bird{
   }
 }
 
+class Collision{
+
+  static check(subject, objects = []){//both the subject and objects are parameters take DOM elements
+    let collision;
+
+    const sbj = subject.getBoundingClientRect();
+    
+    objects.forEach(object => {
+      const obj = object.getBoundingClientRect();
+      
+      if (
+        sbj.right > obj.left && 
+        sbj.left < obj.right &&
+        sbj.bottom > obj.top &&
+        sbj.top < obj.bottom
+      ) collision = true;
+    });
+
+    return collision;
+  }
+
+}
+
 class Game{
 
   static refreshInterval;
@@ -118,6 +141,8 @@ class Game{
                     position = 45;
                     Game.pillarLogic.streamPillars();
                     Game.refreshInterval = setInterval(()=>{
+                          if (Collision.check(birdy, document.querySelectorAll(`.pillar`)))
+                            Game.lose();
                           position += velocity;
                           velocity -= acceleration;
                           if (position < 0) position = 0;
@@ -142,3 +167,12 @@ class Game{
 }
 
 Game.start();
+
+
+//debugging
+const bird = document.querySelector(`#bird`)
+document.addEventListener('mousemove', function(event) {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            document.querySelector(`#mouse-position`).innerText = `Viewport X: ${mouseX}, Viewport Y: ${mouseY}`;
+        });

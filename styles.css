@@ -48,8 +48,21 @@ body {
   }
 }
 
-#score {
+h1 {
   position: fixed;
   top: 0;
   user-select: none;
+}
+
+#you-lost {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  user-select: none;
+}
+
+.hidden{
+  display: none !important;
 }

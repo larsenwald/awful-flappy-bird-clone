@@ -144,6 +144,7 @@ class Game{
 
                 game.addEventListener(`mousedown`, () => {
                   if (!Game.refreshInterval){
+                    document.querySelector(`#you-lost`).classList.add(`hidden`);
                     currentScore = 0;
                     position = 45;
                     Game.pillarLogic.resetDeletedCounter();
@@ -172,6 +173,7 @@ class Game{
   static lose(){
     clearInterval(Game.refreshInterval);
     Game.refreshInterval = null;
+    document.querySelector(`#you-lost`).classList.remove(`hidden`);
 
     Game.pillarLogic.stopStream();
     Game.pillarLogic.freezePillars();

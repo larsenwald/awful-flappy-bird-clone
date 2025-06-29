@@ -151,7 +151,7 @@ class Game{
                           birdy.style.bottom = position + '%';
                     }, 1000/fps);
                   }
-                  velocity = 150/fps;
+                  velocity = 100/fps;
                 })
 
                 //variable jump
@@ -174,9 +174,12 @@ Game.start();
 
 
 //debugging
+/*
 const bird = document.querySelector(`#bird`)
 document.addEventListener('mousemove', function(event) {
             const mouseX = event.clientX;
             const mouseY = event.clientY;
             document.querySelector(`#mouse-position`).innerText = `Viewport X: ${mouseX}, Viewport Y: ${mouseY}`;
         });
+
+*/

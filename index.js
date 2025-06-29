@@ -3,6 +3,11 @@ class PillarLogic{
 
   pillarDeletionTimeouts = [];
 
+  deleted = 0;
+  resetDeletedCounter(){
+    this.deleted = 0;
+  }
+
   freezePillars(){
     this.pillarDeletionTimeouts.forEach(timeOut => clearTimeout(timeOut));
     document.querySelectorAll(`.pillar`).forEach(pillar => {
@@ -44,6 +49,7 @@ class PillarLogic{
         const index = this.pillarDeletionTimeouts.indexOf(timeOutId);
         if (index > -1) 
           this.pillarDeletionTimeouts.splice(index, 1);
+        this.deleted++;
       }, finishJourneyInMilliseconds);
 
     this.pillarDeletionTimeouts.push(timeOutId);
@@ -125,9 +131,12 @@ class Game{
                 bird.renderBird();
 
 
-                const birdy = document.querySelector(`#bird`)
+                
                 const game = document.querySelector(`#game`)
-
+                const birdy = document.querySelector(`#bird`)
+                const score = document.querySelector(`#score`);
+                let currentScore = 0;
+                score.innerText = currentScore;
 
                 let position = 45;
                 let velocity = 0;
@@ -135,12 +144,16 @@ class Game{
 
                 game.addEventListener(`mousedown`, () => {
                   if (!Game.refreshInterval){
-                    this.pillarLogic.clearPillars();
+                    currentScore = 0;
                     position = 45;
+                    Game.pillarLogic.resetDeletedCounter();
+                    Game.pillarLogic.clearPillars();
                     Game.pillarLogic.streamPillars();
+
                     Game.refreshInterval = setInterval(()=>{
                           if (Collision.check(birdy, document.querySelectorAll(`.pillar`)))
                             Game.lose();
+                          currentScore = Game.pillarLogic.deleted;
                           position += velocity;
                           velocity -= acceleration;
                           if (position < 0) position = 0;
@@ -149,6 +162,7 @@ class Game{
                             velocity = 0;
                           }
                           birdy.style.bottom = position + '%';
+                          score.innerText = currentScore;
                     }, 1000/fps);
                   }
                   velocity = 100/fps;

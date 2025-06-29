@@ -48,7 +48,8 @@ body {
   }
 }
 
-#mouse-position {
+#score {
   position: fixed;
   top: 0;
+  user-select: none;
 }

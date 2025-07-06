@@ -45,11 +45,40 @@ body {
 
 #bird {
   width: 5%;
-  aspect-ratio: 1/1;
-  background: blue;
+  height: 10%;
+  background: rgb(52, 52, 255);
   position: absolute;
   bottom: 45%;
   left: 10%;
+  /* border: solid 0.4cqw black;
+  border-radius: 8%; */
+  /* background-image: url("bird.png");
+  background-size: 150% 150%;
+  background-position: center; */
+}
+
+#bird-img {
+  position: relative;
+  width: 140%;
+  aspect-ratio: 1/1;
+  transform: translate(-14%, -14%);
+  user-select: none;
+}
+
+#bird-wing {
+  position: absolute;
+  width: 50%;
+  height: 18%;
+  top: 50%;
+  left: -20%;
+  background-color: rgb(58, 78, 255);
+  border-radius: 0.2cqw;
+  border: solid 0.1cqw black;
+  transform-origin: right center;
+}
+
+.flap {
+  animation: flap 0.3s ease-in-out 1;
 }
 
 h3 {
@@ -113,17 +142,28 @@ h3 {
   }
   25% {
     transform: translateX(10%);
-    background: red;
+    filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(6);
   }
   50% {
     transform: translateX(-10%);
-    background: red;
+    filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(6);
   }
   75% {
     transform: translateX(10%);
-    background: red;
+    filter: grayscale(1) sepia(1) hue-rotate(-50deg) saturate(6);
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes flap {
+  0% {
+  }
+  50% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

@@ -95,7 +95,17 @@ class Bird{
 
   renderBird(){
     const birdElement = document.createElement(`div`);
+
+    const birdImg = document.createElement(`img`);
+    birdImg.src = `bird.png`;
+
+    const birdWing = document.createElement(`div`)
+
     birdElement.id = `bird`
+    birdImg.id = `bird-img`
+    birdWing.id = `bird-wing`
+    birdElement.appendChild(birdImg);
+    birdElement.appendChild(birdWing)
     document.querySelector(`#game`).appendChild(birdElement);
   }
 }
@@ -132,6 +142,7 @@ class Game{
                 bird.renderBird();
 
                 const birdy = document.querySelector(`#bird`)
+                const birdWing = document.querySelector(`#bird-wing`);
                 const score = document.querySelector(`#score`);
                 let currentScore = 0;
                 score.innerText = currentScore;
@@ -167,6 +178,9 @@ class Game{
                     }, 1000/fps);
                   }
                   velocity = 100/fps;
+                  birdWing.classList.remove(`flap`);
+                  birdWing.getBoundingClientRect(); //force browser reflow
+                  birdWing.classList.add(`flap`);
                 })
   }
 

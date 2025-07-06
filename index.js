@@ -151,7 +151,9 @@ class Game{
                 let velocity = 0;
                 let acceleration = 6/fps;
 
-                Game.gameElement.addEventListener(`mousedown`, () => {
+                const eventType = `ontouchstart` in document.documentElement ? `touchstart` : `mousedown`;
+
+                Game.gameElement.addEventListener(eventType, () => {
                   if (!Game.refreshInterval){
                     document.querySelector(`#click-to-start`).classList.add(`hidden`);
                     document.querySelector(`#you-lost`).classList.add(`hidden`);

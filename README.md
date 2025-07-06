@@ -8,6 +8,7 @@ Much of this project was surprisingly intuitive.
 ### Making a responsive game screen.
 
 Just make a #game element (the box that actually holds the game) with a locked aspect ratio, make everything inside use relative units, and voila, everything's responsive no matter the screen size.
+
 Note - I initially had a hard time making font sizes responsive, but it turns out you can actually make a container element have a 'container-type' property of 'inline-size' and then use a unit relative to said container, like 'cqw' (container width) or 'cqi' (container inline size). This way, the font size scales with the container element, which is exactly what I wanted.
 
 ### Pillar spawing logic

@@ -3,6 +3,12 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+html,
+body {
+  touch-action: manipulation; /* “I’ll handle taps—don’t zoom” */
+}
+
 body {
   height: 100vh;
   display: flex;

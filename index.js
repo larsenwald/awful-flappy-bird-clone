@@ -153,7 +153,7 @@ class Game{
 
                 const eventType = `ontouchstart` in document.documentElement ? `touchstart` : `mousedown`;
 
-                Game.gameElement.addEventListener(eventType, () => {
+                Game.gameElement.addEventListener(eventType, (e) => {
                   if (!Game.refreshInterval){
                     document.querySelector(`#click-to-start`).classList.add(`hidden`);
                     document.querySelector(`#you-lost`).classList.add(`hidden`);
@@ -179,11 +179,12 @@ class Game{
                           score.innerText = currentScore;
                     }, 1000/fps);
                   }
+                  e.preventDefault();
                   velocity = 100/fps;
                   birdWing.classList.remove(`flap`);
                   birdWing.getBoundingClientRect(); //force browser reflow
                   birdWing.classList.add(`flap`);
-                })
+                }, {passive: false});
   }
 
   static lose(){

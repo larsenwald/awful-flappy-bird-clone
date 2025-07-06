@@ -21,6 +21,7 @@ body {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  user-select: none;
 }
 
 #click-to-start {
@@ -52,11 +53,6 @@ body {
   position: absolute;
   bottom: 45%;
   left: 10%;
-  /* border: solid 0.4cqw black;
-  border-radius: 8%; */
-  /* background-image: url("bird.png");
-  background-size: 150% 150%;
-  background-position: center; */
 }
 
 #bird-img {
@@ -64,7 +60,6 @@ body {
   width: 140%;
   aspect-ratio: 1/1;
   transform: translate(-14%, -14%);
-  user-select: none;
 }
 
 #bird-wing {
@@ -89,7 +84,6 @@ h3 {
   top: 0;
   left: 0;
   margin: 0.5% 0 0 1%;
-  user-select: none;
 }
 
 #text-block {
@@ -98,14 +92,12 @@ h3 {
   top: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  user-select: none;
 }
 
 .game-text {
   font-size: 2cqw;
   font-family: "Press Start 2P", system-ui;
   text-align: center;
-  user-select: none;
 }
 
 .winking-prompt {

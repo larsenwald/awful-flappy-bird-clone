@@ -8,14 +8,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Montserrat", system-ui;
 }
 
 #game {
+  container-type: inline-size;
   width: 70%;
   aspect-ratio: 2/1;
   border: solid 1px;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+}
+
+#click-to-start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .pillar {
@@ -25,6 +35,7 @@ body {
   position: absolute;
   top: 0;
   right: -10%;
+  z-index: -1;
 }
 
 .pillar-bottom {
@@ -39,12 +50,14 @@ body {
   position: absolute;
   bottom: 45%;
   left: 10%;
-  z-index: 1;
 }
 
-h1 {
-  position: fixed;
+h3 {
+  font-size: 2.2cqw;
+  position: absolute;
   top: 0;
+  left: 0;
+  margin: 0.5% 0 0 1%;
   user-select: none;
 }
 
@@ -57,19 +70,24 @@ h1 {
   user-select: none;
 }
 
-#restart-prompt{
-  animation: pulse 1.5s linear infinite;
-  font-style: italic;
+.game-text {
+  font-size: 2cqw;
+  font-family: "Press Start 2P", system-ui;
+  text-align: center;
+  user-select: none;
 }
 
-.hidden{
+.winking-prompt {
+  animation: pulse 1.5s linear infinite;
+}
+
+.hidden {
   visibility: hidden;
 }
 
-.loss-animation{
+.loss-animation {
   animation: wiggle-and-turn-red 0.5s linear;
 }
-
 
 @keyframes moveLeft {
   to {
@@ -78,34 +96,34 @@ h1 {
 }
 
 @keyframes pulse {
-  0%{
+  0% {
     opacity: 0;
   }
-  50%{
+  50% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes wiggle-and-turn-red {
-  0%{
+  0% {
     transform: translateX(-10%);
   }
-  25%{
+  25% {
     transform: translateX(10%);
     background: red;
   }
-  50%{
+  50% {
     transform: translateX(-10%);
     background: red;
   }
-  75%{
+  75% {
     transform: translateX(10%);
     background: red;
   }
-  100%{
+  100% {
     transform: translateX(0);
   }
 }

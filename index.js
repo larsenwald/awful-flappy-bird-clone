@@ -142,6 +142,7 @@ class Game{
 
                 Game.gameElement.addEventListener(`mousedown`, () => {
                   if (!Game.refreshInterval){
+                    document.querySelector(`#click-to-start`).classList.add(`hidden`);
                     document.querySelector(`#you-lost`).classList.add(`hidden`);
                     document.querySelector(`#restart-prompt`).classList.add(`hidden`);
                     currentScore = 0;

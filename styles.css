@@ -14,6 +14,7 @@ body {
 
 #game {
   container-type: inline-size;
+  touch-action: none; /* Prevents zooming on touch devices */
   width: 70%;
   aspect-ratio: 2/1;
   border: solid 1px;

@@ -5,11 +5,19 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
+  height: max-content;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   font-family: "Montserrat", system-ui;
+}
+
+h1 {
+  font-size: 3vw;
+  user-select: none;
+  font-family: "Dokdo", system-ui;
 }
 
 #game {

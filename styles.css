@@ -32,6 +32,16 @@ h1 {
   user-select: none;
 }
 
+#game-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #e0f7ff 0%, #87ceeb 60%, #4198d0 100%);
+  z-index: -1;
+}
+
 #click-to-start {
   position: absolute;
   top: 50%;

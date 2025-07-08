@@ -42,6 +42,20 @@ h1 {
   z-index: -1;
 }
 
+#sun {
+  width: 6%;
+  aspect-ratio: 1;
+
+  background: rgb(255, 255, 201);
+  box-shadow: 0 0 60px 30px rgba(255, 253, 157, 0.6);
+
+  position: absolute;
+  top: 5%;
+  left: 5%;
+
+  border-radius: 50%;
+}
+
 #click-to-start {
   position: absolute;
   top: 50%;
